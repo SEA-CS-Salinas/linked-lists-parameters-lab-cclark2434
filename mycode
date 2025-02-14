@@ -1,0 +1,64 @@
+import static java.lang.System.*;
+public class ListFunHouse {
+public static void print(ListNode list) {
+ListNode current = list;
+while (current != null) {
+System.out.print(current.getValue() + " ");
+current = current.getNext();
+}
+System.out.println();
+}
+public static int nodeCount(ListNode list) {
+int count = 0;
+ListNode current = list;
+while (current != null) {
+count++;
+current = current.getNext();
+}
+return count;
+}
+public static void doubleFirst(ListNode list) {
+if (list == null) return;
+ListNode newNode = new ListNode(list.getValue(), list.getNext());
+list.setNext(newNode);
+}
+public static void doubleLast(ListNode list) {
+if (list == null) return;
+ListNode current = list;
+while (current.getNext() != null) {
+current = current.getNext();
+}
+current.setNext(new ListNode(current.getValue(), null));
+}
+public static void removeXthNode(ListNode list, int x) {
+if (list == null || x <= 0) return;
+if (x == 1) { // Special case: removing the first node
+if (list.getNext() != null) {
+list.setValue(list.getNext().getValue());
+list.setNext(list.getNext().getNext());
+}
+return;
+}
+int count = 1;
+ListNode current = list;
+while (current != null && current.getNext() != null) {
+if ((count + 1) % x == 0) {
+current.setNext(current.getNext().getNext());
+}
+count++;
+current = current.getNext();
+}
+}
+public static void setXthNode(ListNode list, int x, Comparable value) {
+if (list == null || x <= 0) return;
+int count = 1;
+ListNode current = list;
+while (current != null) {
+if (count % x == 0) {
+current.setValue(value);
+}
+count++;
+current = current.getNext();
+}
+}
+}
